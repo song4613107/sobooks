@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <!-- <canvas></canvas> -->
+    <div class="header">
+        <div class="navheader"></div>
+        <div class="nav">
+            <div class="navList">
+                <div class="link"><a href="/">首页</a></div>
+                <% for(let i=0;i<categorys.length;i++){ %>
+                <div class="link"><a href="/category/<%= categorys[i].id %>"><%= categorys[i].category %></a></div>
+                <% } %>
+                <div class="search">
+                    <input type="text" id="search">
+                    <button class="searchBtn">搜索</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contentMain">
+        <div class="content">
+            <div class="bookList">
+                <div class="bookItem2">
+                    <div class="bookImg">
+                        <img src="<%- book.bookimg %>">
+                    </div>
+                    <h3><%- book.bookname %></h3>
+                    <p class="author"><%- book.author %></p>
+                    <div class="category"><%- book.category %></div>
+                    <h3>内容简介</h3>
+                    <p><%- book.brief %></p>
+                </div>
+            </div>
+            <div class="erweima">
+                <img src="/img/erweima.png">
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/fire.js"></script>
+    <script>
+        var searchBtn = document.querySelector(".searchBtn");
+        searchBtn.onclick = function (e) {
+            let value = document.querySelector("#search").value;
+            location.href = "/search/" + value;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <canvas></canvas>
+    <div class="header">
+        <div class="navheader"></div>
+        <div class="nav">
+            <div class="navList">
+                <div class="link"><a href="/category/1/page/1">首页</a></div>
+                <% for(let i=0;i<categorys.length;i++){ %>
+                <div class="link"><a href="/category/<%= categorys[i].id %>/page/1"><%= categorys[i].category %></a>
+                </div>
+                <% } %>
+                <div class="search">
+                    <input type="text" id="search">
+                    <button class="searchBtn">搜索</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contentMain">
+        <div class="content">
+            <div class="bookList">
+                <% for(let i=0;i<books.length;i++){ %>
+                <a href="/books/<%- books[i].id %>">
+                    <div class="bookItem">
+                        <div class="bookImg">
+                            <img src="<%- books[i].bookimg %>">
+                        </div>
+                        <h3><%- books[i].bookname %></h3>
+                        <p class="author"><%- books[i].author %></p>
+                        <div class="category"><%- books[i].category %></div>
+                    </div>
+                </a>
+                <% } %>
+            </div>
+            <div class="erweima">
+                <img src="/img/erweima.png">
+            </div>
+        </div>
+        <div class="fenpage">
+            <div class="pageBtns">
+                <% if(page>1){ %>
+                <a href="/search/<%= searchKey %>/page/<%= (page-1) %>">上一页</a>
+                <% } %>
+
+                <% for(let i=startPage;i<=endPage;i++){ %>
+                <a <% if(page==i){ %> class="active" <% } %> href="/search/<%= searchKey %>/page/<%= i %>"><%= i %></a>
+                <% } %>
+
+                <% if(page<pageAll){ %>
+                <a href="/search/<%= searchKey %>/page/<%= (page+1) %>">下一页</a>
+                <% } %>
+            </div>
+            <div class="allCount">
+                共<%= pageAll %>页
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/fire.js"></script>
+    <script>
+        var searchBtn = document.querySelector(".searchBtn");
+        searchBtn.onclick = function (e) {
+            let value = document.querySelector("#search").value;
+            location.href = "/search/" + value + "/page/1";
+        }
+    </script>
+</body>
+
+</html>
